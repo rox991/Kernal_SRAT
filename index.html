@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kali Linux Portfolio | Sayan - Co-founder SRat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="kali-logo">
+            <i class="fab fa-kickstarter"></i>
+            <span>Sayan () Kernal </span>
+        </div>
+        <div class="top-menu">
+            <span onclick="showNotification('File menu opened')">File</span>
+            <span onclick="showNotification('Edit menu opened')">Edit</span>
+            <span onclick="toggleTheme()">View</span>
+            <span onclick="openTerminal('terminal')">Terminal</span>
+            <span onclick="showHelp()">Help</span>
+        </div>
+    </div>
+
+    <!-- Desktop Icons -->
+    <div class="desktop">
+        <div class="icon" onclick="openTerminal('about')">
+            <div class="icon-img">
+                <i class="fas fa-user-secret"></i>
+            </div>
+            <div class="icon-text">About_Sayan</div>
+        </div>
+        <div class="icon" onclick="openTerminal('skills')">
+            <div class="icon-img">
+                <i class="fas fa-terminal"></i>
+            </div>
+            <div class="icon-text">Skills</div>
+        </div>
+        <div class="icon" onclick="openTerminal('projects')">
+            <div class="icon-img">
+                <i class="fas fa-folder-open"></i>
+            </div>
+            <div class="icon-text">Projects</div>
+        </div>
+        <div class="icon" onclick="openTerminal('education')">
+            <div class="icon-img">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <div class="icon-text">Education</div>
+        </div>
+        <div class="icon" onclick="openTerminal('contact')">
+            <div class="icon-img">
+                <i class="fas fa-envelope-open-text"></i>
+            </div>
+            <div class="icon-text">Contact</div>
+        </div>
+        <div class="icon" onclick="openTerminal('srat')">
+            <div class="icon-img">
+                <i class="fas fa-rocket"></i>
+            </div>
+            <div class="icon-text">SRat Team</div>
+        </div>
+        <div class="icon" onclick="openTerminal('terminal')">
+            <div class="icon-img">
+                <i class="fas fa-code"></i>
+            </div>
+            <div class="icon-text">Terminal</div>
+        </div>
+        <div class="icon" onclick="openTerminal('hacking')">
+            <div class="icon-img">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <div class="icon-text">Hacking_Tools</div>
+        </div>
+        <div class="icon" onclick="showNotification('System settings will be available soon')">
+            <div class="icon-img">
+                <i class="fas fa-cogs"></i>
+            </div>
+            <div class="icon-text">Settings</div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+    <!-- Start Menu Dropdown -->
+    <div class="start-menu-dropdown" id="startMenu">
+        <div class="start-menu-header">
+            <i class="fab fa-kickstarter"></i>
+            <h3>Sayan Kernal Menu () </h3>
+        </div>
+        <div class="start-menu-items">
+            <div class="start-menu-item" onclick="openTerminal('about'); closeStartMenu()">
+                <i class="fas fa-user"></i>
+                <span>About Sayan</span>
+            </div>
+            <div class="start-menu-item" onclick="openTerminal('skills'); closeStartMenu()">
+                <i class="fas fa-code"></i>
+                <span>Skills & Expertise</span>
+            </div>
+            <div class="start-menu-item" onclick="openTerminal('projects'); closeStartMenu()">
+                <i class="fas fa-folder"></i>
+                <span>Projects Portfolio</span>
+            </div>
+            <div class="start-menu-item" onclick="openTerminal('education'); closeStartMenu()">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Education & JEE</span>
+            </div>
+            <div class="start-menu-item" onclick="openTerminal('srat'); closeStartMenu()">
+                <i class="fas fa-users"></i>
+                <span>SRat Team Info</span>
+            </div>
+            <div class="start-menu-item" onclick="openTerminal('contact'); closeStartMenu()">
+                <i class="fas fa-envelope"></i>
+                <span>Contact Sayan</span>
+            </div>
+            <div class="start-menu-item" onclick="openTerminal('terminal'); closeStartMenu()">
+                <i class="fas fa-terminal"></i>
+                <span>Interactive Terminal</span>
+            </div>
+            <div class="start-menu-item" onclick="showNotification('System shutdown initiated'); setTimeout(() => { showNotification('Just kidding! 😄') }, 1000); closeStartMenu()">
+                <i class="fas fa-power-off"></i>
+                <span>Shutdown</span>
+            </div>
+        </div>
+    </div>
+    <!-- Shutdown Screen -->
+    <div class="shutdown-screen" id="shutdownScreen">
+        <div class="shutdown-logo">
+            <i class="fab fa-kickstarter"></i>
+        </div>
+        <div class="shutdown-text">
+            Shutting down Kali Portfolio...
+        </div>
+        <div class="shutdown-progress">
+            <div class="shutdown-progress-bar"></div>
+        </div>
+        <div class="shutdown-message">
+            Preparing to shutdown...
+        </div>
+    </div>
+
+    <!-- About Me Terminal -->
+    <div id="about" class="terminal">
+        <div class="terminal-header" id="about-header">
+            <div class="terminal-title">
+                <i class="fas fa-user-secret"></i>
+                About_Sayan.txt
+            </div>
+            <div class="terminal-controls">
+                <div class="control-btn min-btn" onclick="minimizeTerminal('about')"></div>
+                <div class="control-btn max-btn" onclick="maximizeTerminal('about')"></div>
+                <div class="control-btn close-btn" onclick="closeTerminal('about')"></div>
+            </div>
+        </div>
+        <div class="terminal-body">
+            <div class="terminal-prompt">cat about_sayan.txt --color</div>
+            <div class="terminal-output about-content">
+                <p><span class="highlight">NAME:</span> <span class="cyan">Sayan</span></p>
+                <p><span class="highlight">ROLE:</span> Co-founder of <span class="purple">SRat</span> | Class 12 Student | JEE Aspirant</p>
+                <p><span class="highlight">FIELD:</span> Computer Science Engineering (CSE)</p>
+                <p><span class="highlight">LOCATION:</span> <span class="cmd">India</span></p>
+                <br>
+                <p><span class="highlight">PROFILE:</span></p>
+                <p>Currently in Class 12 preparing for <span class="red">JEE (Joint Entrance Examination)</span> while building a tech startup <span class="purple">SRat</span>.</p>
+                <p>Frontend Developer with expertise in modern web technologies.</p>
+                <p>Mastered trading strategies and advanced communication skills.</p>
+                <p>Passionate about cybersecurity, open-source tools, and Linux environments.</p>
+                <br>
+                <p><span class="cmd">$ whoami</span></p>
+                <p class="typewriter">student | developer | entrepreneur | trader | linux enthusiast</p>
+                <br>
+                <p><span class="highlight">TEAM:</span> Working with <span class="purple">Pratik</span> (Founder & Senior Developer of SRat)</p>
+            </div>
+            <div class="terminal-prompt"><span class="cursor"></span></div>
+        </div>
+    </div>
+
+    <!-- Skills Terminal -->
+    <div id="skills" class="terminal">
+        <div class="terminal-header" id="skills-header">
+            <div class="terminal-title">
+                <i class="fas fa-terminal"></i>
+                Skills.sh
+            </div>
+            <div class="terminal-controls">
+                <div class="control-btn min-btn" onclick="minimizeTerminal('skills')"></div>
+                <div class="control-btn max-btn" onclick="maximizeTerminal('skills')"></div>
+                <div class="control-btn close-btn" onclick="closeTerminal('skills')"></div>
+            </div>
+        </div>
+        <div class="terminal-body">
+            <div class="terminal-prompt">./skills.sh --verbose</div>
+            <div class="terminal-output">
+                <p><span class="highlight">TECHNICAL SKILLS:</span></p>
+                
+                <div class="skill-bar">
+                    <div class="skill-name">
+                        <span>Frontend Development</span>
+                        <span>88%</span>
+                    </div>
+                    <div class="skill-level">
+                        <div class="skill-progress" style="width: 88%"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-bar">
+                    <div class="skill-name">
+                        <span>HTML5/CSS3/JavaScript</span>
+                        <span>92%</span>
+                    </div>
+                    <div class="skill-level">
+                        <div class="skill-progress" style="width: 92%"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-bar">
+                    <div class="skill-name">
+                        <span>Linux & Kali Tools</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="skill-level">
+                        <div class="skill-progress" style="width: 85%"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-bar">
+                    <div class="skill-name">
+                        <span>Python Programming</span>
+                        <span>78%</span>
+                    </div>
+                    <div class="skill-level">
+                        <div class="skill-progress" style="width: 78%"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-bar">
+                    <div class="skill-name">
+                        <span>React.js Framework</span>
+                        <span>75%</span>
+                    </div>
+                    <div class="skill-level">
+                        <div class="skill-progress" style="width: 75%"></div>
+                    </div>
+                </div>
+                
+                <br>
+                <p><span class="highlight">SOFT SKILLS:</span></p>
+                <p><span class="blue">•</span> <span class="cmd">Trading & Financial Analysis</span> - Mastered stock market strategies</p>
+                <p><span class="blue">•</span> <span class="cmd">Communication & Presentation</span> - Effective team communication</p>
+                <p><span class="blue">•</span> <span class="cmd">Team Leadership</span> - Co-founder of SRat startup</p>
+                <p><span class="blue">•</span> <span class="cmd">Problem Solving</span> - JEE level analytical thinking</p>
+                <p><span class="blue">•</span> <span class="cmd">Time Management</span> - Balancing studies & startup</p>
+                
+                <br>
+                <p><span class="highlight">CERTIFICATIONS:</span></p>
+                <p><span class="green">•</span> Kali Linux Certified Professional (In Progress)</p>
+                <p><span class="green">•</span> Frontend Web Development Certification</p>
+                <p><span class="green">•</span> Stock Market Trading Certification</p>
+                
+                <br>
+                <div class="terminal-prompt"><span class="cursor"></span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Projects Terminal -->
+    <div id="projects" class="terminal">
+        <div class="terminal-header" id="projects-header">
+            <div class="terminal-title">
+                <i class="fas fa-folder-open"></i>
+                Projects/
+            </div>
+            <div class="terminal-controls">
+                <div class="control-btn min-btn" onclick="minimizeTerminal('projects')"></div>
+                <div class="control-btn max-btn" onclick="maximizeTerminal('projects')"></div>
+                <div class="control-btn close-btn" onclick="closeTerminal('projects')"></div>
+            </div>
+        </div>
+        <div class="terminal-tabs">
+            <div class="terminal-tab active" onclick="switchProjectTab('current')">Current</div>
+            <div class="terminal-tab" onclick="switchProjectTab('web')">Web</div>
+            <div class="terminal-tab" onclick="switchProjectTab('upcoming')">Upcoming</div>
+        </div>
+        <div class="terminal-body">
+            <div id="current-projects" class="tab-content">
+                <div class="terminal-prompt">ls -la projects/current/</div>
+                <div class="terminal-output">
+                    <p><span class="highlight">SRAT STARTUP:</span> <span class="cyan">(Active Development)</span></p>
+                    <p><span class="cmd">•</span> Co-founded educational tech startup with <span class="purple">Pratik (Founder)</span></p>
+                    <p><span class="cmd">•</span> Platform for student resources, JEE/NEET preparation tools</p>
+                    <p><span class="cmd">•</span> Real-time collaboration features for students</p>
+                    <p><span class="cmd">•</span> Tech Stack: React.js, Node.js, MongoDB, Linux Server</p>
+                    
+                    <br>
+                    <p><span class="highlight">KALI PORTFOLIO:</span> <span class="cyan">(Current Project)</span></p>
+                    <p><span class="cmd">•</span> Interactive Kali Linux themed portfolio website</p>
+                    <p><span class="cmd">•</span> Fully responsive with terminal emulation</p>
+                    <p><span class="cmd">•</span> Real-time command execution interface</p>
+                </div>
+            </div>
+            <div id="web-projects" class="tab-content" style="display:none;">
+                <div class="terminal-prompt">ls -la projects/web/</div>
+                <div class="terminal-output">
+                    <p><span class="highlight">COMPLETED WEB PROJECTS:</span></p>
+                    <p><span class="cmd">• Windows 95 Style Portfolio</span> - Retro themed interactive portfolio</p>
+                    <p><span class="cmd">• Educational Dashboard</span> - JEE preparation resources portal</p>
+                    <p><span class="cmd">• Trading Analysis Tool</span> - Stock market analysis interface</p>
+                    <p><span class="cmd">• Linux Command Simulator</span> - Web-based terminal simulator</p>
+                    
+                    <br>
+                    <p><span class="highlight">GITHUB REPOSITORIES:</span></p>
+                    <p><span class="green">•</span> 15+ public repositories</p>
+                    <p><span class="green">•</span> 500+ commits</p>
+                    <p><span class="green">•</span> 10+ contributors across projects</p>
+                </div>
+            </div>
+            <div id="upcoming-projects" class="tab-content" style="display:none;">
+                <div class="terminal-prompt">ls -la projects/upcoming/</div>
+                <div class="terminal-output">
+                    <p><span class="highlight">UPCOMING PROJECTS:</span></p>
+                    <p><span class="purple">• SRat Mobile App</span> - React Native based mobile application</p>
+                    <p><span class="purple">• JEE Preparation AI</span> - AI-powered study assistant</p>
+                    <p><span class="purple">• Open Source CLI Tools</span> - Linux utility packages</p>
+                    <p><span class="purple">• Cybersecurity Toolkit</span> - Web security assessment tools</p>
+                    
+                    <br>
+                    <p><span class="highlight">RESEARCH & DEVELOPMENT:</span></p>
+                    <p><span class="cyan">•</span> Machine Learning for educational analytics</p>
+                    <p><span class="cyan">•</span> Blockchain for certificate verification</p>
+                    <p><span class="cyan">•</span> AR/VR for interactive learning</p>
+                </div>
+            </div>
+            <div class="terminal-prompt"><span class="cursor"></span></div>
+        </div>
+    </div>
+
+    <!-- SRat Team Terminal -->
+    <div id="srat" class="terminal">
+        <div class="terminal-header" id="srat-header">
+            <div class="terminal-title">
+                <i class="fas fa-rocket"></i>
+                SRat_Team_Info
+            </div>
+            <div class="terminal-controls">
+                <div class="control-btn min-btn" onclick="minimizeTerminal('srat')"></div>
+                <div class="control-btn max-btn" onclick="maximizeTerminal('srat')"></div>
+                <div class="control-btn close-btn" onclick="closeTerminal('srat')"></div>
+            </div>
+        </div>
+        <div class="terminal-body">
+            <div class="terminal-prompt">startup --team --details</div>
+            <div class="terminal-output">
+                <p><span class="highlight">SRAT - STUDENT RESOURCES & TOOLS</span></p>
+                <p><span class="cyan">"Empowering the future of education through technology"</span></p>
+                
+                <br>
+                <p><span class="highlight">TEAM STRUCTURE:</span></p>
+                <div class="skill-bar">
+                    <div class="skill-name">
+                        <span><i class="fas fa-crown purple"></i> Pratik - Founder & Senior Developer</span>
+                        <span>Leadership</span>
+                    </div>
+                    <div class="skill-level">
+                        <div class="skill-progress" style="width: 95%"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-bar">
+                    <div class="skill-name">
+                        <span><i class="fas fa-user-tie cyan"></i> Sayan - Co-founder & Frontend Lead</span>
+                        <span>Development</span>
+                    </div>
+                    <div class="skill-level">
+                        <div class="skill-progress" style="width: 88%"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-bar">
+                    <div class="skill-name">
+                        <span><i class="fas fa-users blue"></i> Development Team (3 Members)</span>
+                        <span>Execution</span>
+                    </div>
+                    <div class="skill-level">
+                        <div class="skill-progress" style="width: 75%"></div>
+                    </div>
+                </div>
+                
+                <br>
+                <p><span class="highlight">FOUNDER PROFILE:</span></p>
+                <p><span class="cmd">Pratik</span> - Senior Full Stack Developer with 5+ years experience</p>
+                <p><span class="cmd">Expertise:</span> Backend Systems, Database Architecture, Cloud Infrastructure</p>
+                <p><span class="cmd">Role:</span> Technical Lead, System Architect, Business Strategy</p>
+                
+                <br>
+                <p><span class="highlight">CO-FOUNDER PROFILE:</span></p>
+                <p><span class="cmd">Sayan</span> - Frontend Specialist & Student Entrepreneur</p>
+                <p><span class="cmd">Expertise:</span> UI/UX Design, Frontend Development, User Experience</p>
+                <p><span class="cmd">Role:</span> Product Design, Frontend Development, Student Outreach</p>
+                
+                <br>
+                <p><span class="highlight">TECH STACK:</span></p>
+                <p><span class="purple">Frontend:</span> React.js, Redux, TypeScript, Sass, Webpack</p>
+                <p><span class="purple">Backend:</span> Node.js, Express.js, Python Django, PostgreSQL</p>
+                <p><span class="purple">DevOps:</span> Docker, AWS, Linux Servers, GitHub Actions</p>
+                <p><span class="purple">Tools:</span> Git, VS Code, Figma, Jira, Slack</p>
+                
+                <br>
+                <p><span class="green">"Building scalable educational solutions for India's student community."</span></p>
+                
+                <br>
+                <div class="terminal-prompt"><span class="cursor"></span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Terminal -->
+    <div id="terminal" class="terminal">
+        <div class="terminal-header" id="terminal-header">
+            <div class="terminal-title">
+                <i class="fas fa-terminal"></i>
+                root@kali-portfolio:~
+            </div>
+            <div class="terminal-controls">
+                <div class="control-btn min-btn" onclick="minimizeTerminal('terminal')"></div>
+                <div class="control-btn max-btn" onclick="maximizeTerminal('terminal')"></div>
+                <div class="control-btn close-btn" onclick="closeTerminal('terminal')"></div>
+            </div>
+        </div>
+        <div class="terminal-body" id="terminal-output">
+            <div class="terminal-prompt">Welcome to Kali Linux Portfolio Terminal v3.0</div>
+            <div class="terminal-output">
+                <p>Type <span class="cmd">'help'</span> for available commands</p>
+                <p>Type <span class="cmd">'clear'</span> to clear terminal</p>
+                <p>Type <span class="cmd">'gui'</span> to open graphical interface</p>
+                <br>
+                <p><span class="highlight">System Info:</span></p>
+                <p>User: <span class="cyan">sayan</span> | Host: <span class="cyan">kali-portfolio</span></p>
+                <p>OS: Kali Linux Portfolio v3.0 | Shell: WebTerminal 1.0</p>
+                <p>Uptime: <span id="uptime">0 days, 0 hours, 0 minutes</span></p>
+            </div>
+            <div class="terminal-prompt" id="current-prompt">
+                <span>root@kali-portfolio:~#</span>
+                <div id="command-line" contenteditable="true" spellcheck="false"></div>
+                <span class="cursor"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Education Terminal -->
+    <div id="education" class="terminal">
+        <div class="terminal-header" id="education-header">
+            <div class="terminal-title">
+                <i class="fas fa-graduation-cap"></i>
+                Education.txt
+            </div>
+            <div class="terminal-controls">
+                <div class="control-btn min-btn" onclick="minimizeTerminal('education')"></div>
+                <div class="control-btn max-btn" onclick="maximizeTerminal('education')"></div>
+                <div class="control-btn close-btn" onclick="closeTerminal('education')"></div>
+            </div>
+        </div>
+        <div class="terminal-body">
+            <div class="terminal-prompt">cat education_details.txt --format=table</div>
+            <div class="terminal-output">
+                <p><span class="highlight">ACADEMIC BACKGROUND:</span></p>
+                <div class="skill-bar">
+                    <div class="skill-name">
+                        <span>Class 12 (Current)</span>
+                        <span>2023-2024</span>
+                    </div>
+                    <div class="skill-level">
+                        <div class="skill-progress" style="width: 85%"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-bar">
+                    <div class="skill-name">
+                        <span>Class 11</span>
+                        <span>2022-2023</span>
+                    </div>
+                    <div class="skill-level">
+                        <div class="skill-progress" style="width: 90%"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-bar">
+                    <div class="skill-name">
+                        <span>Class 10 (Board Exams)</span>
+                        <span>2021-2022</span>
+                    </div>
+                    <div class="skill-level">
+                        <div class="skill-progress" style="width: 95%"></div>
+                    </div>
+                </div>
+                
+                <br>
+                <p><span class="highlight">JEE PREPARATION:</span></p>
+                <p><span class="cmd">•</span> Preparing for JEE Main & Advanced 2024</p>
+                <p><span class="cmd">•</span> Subjects: Physics, Chemistry, Mathematics</p>
+                <p><span class="cmd">•</span> Target: Computer Science Engineering (CSE)</p>
+                <p><span class="cmd">•</span> Current Level: Advanced problem solving</p>
+                
+                <br>
+                <p><span class="highlight">LEARNING METHODOLOGY:</span></p>
+                <p><span class="purple">•</span> Daily coding practice (2-3 hours)</p>
+                <p><span class="purple">•</span> JEE preparation (6-7 hours)</p>
+                <p><span class="purple">•</span> Startup work (3-4 hours)</p>
+                <p><span class="purple">•</span> Weekend: Full project development</p>
+                
+                <br>
+                <p><span class="highlight">FUTURE GOALS:</span></p>
+                <p><span class="cyan">•</span> Secure admission in top IIT/NIT for CSE</p>
+                <p><span class="cyan">•</span> Scale SRat to 10,000+ users</p>
+                <p><span class="cyan">•</span> Develop AI-powered educational tools</p>
+                <p><span class="cyan">•</span> Contribute to open-source projects</p>
+                
+                <br>
+                <p><span class="green">"Balancing academics with entrepreneurship to build the future."</span></p>
+            </div>
+            <div class="terminal-prompt"><span class="cursor"></span></div>
+        </div>
+    </div>
+
+    <!-- Contact Terminal -->
+    <div id="contact" class="terminal">
+        <div class="terminal-header" id="contact-header">
+            <div class="terminal-title">
+                <i class="fas fa-envelope-open-text"></i>
+                Contact_Info.txt
+            </div>
+            <div class="terminal-controls">
+                <div class="control-btn min-btn" onclick="minimizeTerminal('contact')"></div>
+                <div class="control-btn max-btn" onclick="maximizeTerminal('contact')"></div>
+                <div class="control-btn close-btn" onclick="closeTerminal('contact')"></div>
+            </div>
+        </div>
+        <div class="terminal-body">
+            <div class="terminal-prompt">./contact.sh --all --secure</div>
+            <div class="terminal-output">
+                <p><span class="highlight">CONNECT WITH ME:</span></p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 20px 0;">
+                    <div style="background: rgba(28, 184, 44, 0.1); padding: 15px; border-radius: 8px; border-left: 4px solid var(--kali-green);">
+                        <p><i class="fas fa-envelope purple"></i> <span class="highlight">Email:</span></p>
+                        <p class="cyan">sayanbrahma765@gmail.com</p>
+                        <p><small><i class="fas fa-shield-alt"></i> Encrypted & Secure</small></p>
+                    </div>
+                    
+                    <div style="background: rgba(138, 43, 226, 0.1); padding: 15px; border-radius: 8px; border-left: 4px solid var(--kali-purple);">
+                        <p><i class="fab fa-github purple"></i> <span class="highlight">GitHub:</span></p>
+                        <p class="cyan">github.com/sayan-srat</p>
+                        <p><small><i class="fas fa-code-branch"></i> Open Source Projects</small></p>
+                    </div>
+                    
+                    <div style="background: rgba(0, 255, 255, 0.1); padding: 15px; border-radius: 8px; border-left: 4px solid var(--kali-cyan);">
+                        <p><i class="fab fa-linkedin purple"></i> <span class="highlight">LinkedIn:</span></p>
+                        <p class="cyan">linkedin.com/in/sayan-srat</p>
+                        <p><small><i class="fas fa-network-wired"></i> Professional Network</small></p>
+                    </div>
+                    
+                    <div style="background: rgba(255, 85, 85, 0.1); padding: 15px; border-radius: 8px; border-left: 4px solid var(--kali-red);">
+                        <p><i class="fab fa-twitter purple"></i> <span class="highlight">Twitter:</span></p>
+                        <p class="cyan">@sayan_srat</p>
+                        <p><small><i class="fas fa-hashtag"></i> Tech Updates & Thoughts</small></p>
+                    </div>
+                </div>
+                
+                <br>
+                <p><span class="highlight">AVAILABILITY:</span></p>
+                <p><span class="cmd">•</span> Email Response: Within 24 hours</p>
+                <p><span class="cmd">•</span> Collaboration: Open for educational tech projects</p>
+                <p><span class="cmd">•</span> Mentorship: Available for aspiring developers</p>
+                <p><span class="cmd">•</span> Best Time: Evenings & Weekends</p>
+                
+                <br>
+                <p><span class="highlight">PREFERRED COMMUNICATION:</span></p>
+                <p>1. Email for formal inquiries</p>
+                <p>2. GitHub Issues for project collaboration</p>
+                <p>3. LinkedIn for professional connections</p>
+                <p>4. Twitter for quick updates</p>
+                
+                <br>
+                <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; text-align: center;">
+                    <p><span class="green">"Always open to discussing technology, education, and entrepreneurship."</span></p>
+                    <p><small>PGP Key Available Upon Request</small></p>
+                </div>
+            </div>
+            <div class="terminal-prompt"><span class="cursor"></span></div>
+        </div>
+    </div>
+
+    <!-- Hacking Tools Terminal -->
+    <div id="hacking" class="terminal">
+        <div class="terminal-header" id="hacking-header">
+            <div class="terminal-title">
+                <i class="fas fa-shield-alt"></i>
+                Hacking_Tools/
+            </div>
+            <div class="terminal-controls">
+                <div class="control-btn min-btn" onclick="minimizeTerminal('hacking')"></div>
+                <div class="control-btn max-btn" onclick="maximizeTerminal('hacking')"></div>
+                <div class="control-btn close-btn" onclick="closeTerminal('hacking')"></div>
+            </div>
+        </div>
+        <div class="terminal-tabs">
+            <div class="terminal-tab active" onclick="switchHackingTab('info')">Info Gathering</div>
+            <div class="terminal-tab" onclick="switchHackingTab('vulnerability')">Vulnerability</div>
+            <div class="terminal-tab" onclick="switchHackingTab('wireless')">Wireless</div>
+            <div class="terminal-tab" onclick="switchHackingTab('webapp')">Web Apps</div>
+        </div>
+        <div class="terminal-body">
+            <div id="info-hacking" class="tab-content">
+                <div class="terminal-prompt">ls -la /usr/share/kali-tools/information-gathering/</div>
+                <div class="terminal-output">
+                    <p><span class="highlight">INFORMATION GATHERING TOOLS:</span></p>
+                    
+                    <div class="skill-bar">
+                        <div class="skill-name">
+                            <span><i class="fas fa-search purple"></i> Nmap</span>
+                            <span>Network Discovery</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-progress" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-bar">
+                        <div class="skill-name">
+                            <span><i class="fas fa-globe purple"></i> Recon-ng</span>
+                            <span>Web Reconnaissance</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-progress" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-bar">
+                        <div class="skill-name">
+                            <span><i class="fas fa-eye purple"></i> theHarvester</span>
+                            <span>Email & Subdomain</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-bar">
+                        <div class="skill-name">
+                            <span><i class="fas fa-fingerprint purple"></i> Maltego</span>
+                            <span>Data Visualization</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-progress" style="width: 75%"></div>
+                        </div>
+                    </div>
+                    
+                    <br>
+                    <p><span class="highlight">EXPERIENCE LEVEL:</span></p>
+                    <p><span class="cyan">•</span> Network scanning & enumeration</p>
+                    <p><span class="cyan">•</span> OS fingerprinting & service detection</p>
+                    <p><span class="cyan">•</span> DNS enumeration & subdomain discovery</p>
+                    <p><span class="cyan">•</span> Social media reconnaissance</p>
+                    
+                    <br>
+                    <p><span class="green">"Ethical hacking for security assessment and penetration testing."</span></p>
+                </div>
+            </div>
+            <div id="vulnerability-hacking" class="tab-content" style="display:none;">
+                <div class="terminal-prompt">ls -la /usr/share/kali-tools/vulnerability-analysis/</div>
+                <div class="terminal-output">
+                    <p><span class="highlight">VULNERABILITY ANALYSIS TOOLS:</span></p>
+                    
+                    <div class="skill-bar">
+                        <div class="skill-name">
+                            <span><i class="fas fa-bug red"></i> Metasploit Framework</span>
+                            <span>Exploitation</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-bar">
+                        <div class="skill-name">
+                            <span><i class="fas fa-search red"></i> Nessus</span>
+                            <span>Vulnerability Scanner</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-progress" style="width: 70%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-bar">
+                        <div class="skill-name">
+                            <span><i class="fas fa-code red"></i> Burp Suite</span>
+                            <span>Web Vulnerability</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-progress" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-bar">
+                        <div class="skill-name">
+                            <span><i class="fas fa-shield red"></i> OpenVAS</span>
+                            <span>Open Source Scanner</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-progress" style="width: 75%"></div>
+                        </div>
+                    </div>
+                    
+                    <br>
+                    <p><span class="highlight">EXPERIENCE LEVEL:</span></p>
+                    <p><span class="cyan">•</span> Vulnerability scanning & assessment</p>
+                    <p><span class="cyan">•</span> Exploit development & testing</p>
+                    <p><span class="cyan">•</span> Web application security testing</p>
+                    <p><span class="cyan">•</span> Security patch verification</p>
+                </div>
+            </div>
+            <div id="wireless-hacking" class="tab-content" style="display:none;">
+                <div class="terminal-prompt">ls -la /usr/share/kali-tools/wireless-attacks/</div>
+                <div class="terminal-output">
+                    <p><span class="highlight">WIRELESS SECURITY TOOLS:</span></p>
+                    
+                    <div class="skill-bar">
+                        <div class="skill-name">
+                            <span><i class="fas fa-wifi cyan"></i> Aircrack-ng</span>
+                            <span>WiFi Security</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-progress" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-bar">
+                        <div class="skill-name">
+                            <span><i class="fas fa-satellite-dish cyan"></i> Kismet</span>
+                            <span>Wireless Detection</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-progress" style="width: 70%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-bar">
+                        <div class="skill-name">
+                            <span><i class="fas fa-broadcast-tower cyan"></i> Wifite</span>
+                            <span>Automated WiFi Tool</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-progress" style="width: 75%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-bar">
+                        <div class="skill-name">
+                            <span><i class="fas fa-mobile-alt cyan"></i> Bettercap</span>
+                            <span>Man-in-the-Middle</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-progress" style="width: 65%"></div>
+                        </div>
+                    </div>
+                    
+                    <br>
+                    <p><span class="highlight">EXPERIENCE LEVEL:</span></p>
+                    <p><span class="cyan">•</span> WiFi network security testing</p>
+                    <p><span class="cyan">•</span> Packet capturing & analysis</p>
+                    <p><span class="cyan">•</span> Wireless network monitoring</p>
+                    <p><span class="cyan">•</span> Bluetooth security assessment</p>
+                </div>
+            </div>
+            <div id="webapp-hacking" class="tab-content" style="display:none;">
+                <div class="terminal-prompt">ls -la /usr/share/kali-tools/web-applications/</div>
+                <div class="terminal-output">
+                    <p><span class="highlight">WEB APPLICATION SECURITY:</span></p>
+                    
+                    <div class="skill-bar">
+                        <div class="skill-name">
+                            <span><i class="fas fa-code blue"></i> OWASP ZAP</span>
+                            <span>Web App Scanner</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-progress" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-bar">
+                        <div class="skill-name">
+                            <span><i class="fas fa-spider blue"></i> SQLmap</span>
+                            <span>SQL Injection</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-bar">
+                        <div class="skill-name">
+                            <span><i class="fas fa-crosshairs blue"></i> Nikto</span>
+                            <span>Web Server Scanner</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-progress" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-bar">
+                        <div class="skill-name">
+                            <span><i class="fas fa-bug blue"></i> WPScan</span>
+                            <span>WordPress Security</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-progress" style="width: 75%"></div>
+                        </div>
+                    </div>
+                    
+                    <br>
+                    <p><span class="highlight">EXPERIENCE LEVEL:</span></p>
+                    <p><span class="cyan">•</span> Web vulnerability scanning</p>
+                    <p><span class="cyan">•</span> SQL injection testing</p>
+                    <p><span class="cyan">•</span> XSS & CSRF testing</p>
+                    <p><span class="cyan">•</span> API security testing</p>
+                </div>
+            </div>
+            <div class="terminal-prompt"><span class="cursor"></span></div>
+        </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="bottom-bar">
+        <button class="start-menu" onclick="toggleStartMenu()">
+            <i class="fab fa-kickstarter"></i> Kernal menu
+        </button>
+        <div class="system-tray">
+            <div class="tray-icon" onclick="showNotification('WiFi: Connected to Kali-Network')">
+                <i class="fas fa-wifi"></i>
+            </div>
+            <div class="tray-icon" onclick="toggleSound()">
+                <i class="fas fa-volume-up" id="volume-icon"></i>
+            </div>
+            <div class="tray-icon" onclick="showNotification('Battery: 87% - Power saving mode')">
+                <i class="fas fa-battery-three-quarters"></i>
+            </div>
+            <div class="time" id="time">00:00:00</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
